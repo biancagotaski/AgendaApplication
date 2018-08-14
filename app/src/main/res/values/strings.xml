@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AgendaApplication</string>
+    <string name="label_name">Nome</string>
+    <string name="label_telephone">Telefone</string>
+    <string name="label_email">E-mail</string>
+    <string name="label_city">Cidade</string>
+    <string name="add_btn">Adicionar</string>
+</resources>
