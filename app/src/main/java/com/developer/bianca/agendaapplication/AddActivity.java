@@ -66,7 +66,7 @@ public class AddActivity extends AppCompatActivity {
             fileOutputStream.write(newContact.getEmail().getBytes());
             fileOutputStream.write("\n".getBytes());
             fileOutputStream.write(newContact.getCity().getBytes());
-            fileOutputStream.write("\n#".getBytes());
+            fileOutputStream.write("\n".getBytes());
             fileOutputStream.close();
 
             //writer.close();
@@ -77,4 +77,6 @@ public class AddActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    //TODO: Implementar botão para dar clean no formulário, para adicionar um novo contato.
 }

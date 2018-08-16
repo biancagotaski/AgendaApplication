@@ -31,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void removeContacts(View view) {
         File file = new File(getFilesDir(), Constants.CONTACTS_FILENAME);
-        file.delete();
-        Toast.makeText(this, "Agenda zerada com sucesso!", Toast.LENGTH_LONG).show();
+            if(file.exists()){
+                file.delete();
+                Toast.makeText(this, "Agenda zerada com sucesso!", Toast.LENGTH_LONG).show();
+            }
             try{
                 file.createNewFile();
             }catch (Exception e){
