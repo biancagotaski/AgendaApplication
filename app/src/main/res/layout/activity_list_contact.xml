@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RemoveActivity">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TODO: REMOVER CONTATO DA LISTA -> FAZER LAYOUT"/>
+    tools:context=".ListContactActivity">
 
 </android.support.constraint.ConstraintLayout>

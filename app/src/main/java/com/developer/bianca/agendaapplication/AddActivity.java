@@ -1,19 +1,15 @@
 package com.developer.bianca.agendaapplication;
 
-import android.support.design.widget.TextInputEditText;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import com.developer.bianca.agendaapplication.Utils.Constants;
+
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -21,6 +17,8 @@ public class AddActivity extends AppCompatActivity {
     EditText editTextTelephone;
     EditText editTextEmail;
     EditText editTextCity;
+
+    FileOutputStream fileOutputStream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,48 +40,41 @@ public class AddActivity extends AppCompatActivity {
 
         final ListContactCard contactCard = new ListContactCard(nameContact, telephoneContact, emailContact, cityContact);
 
-        new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            File outFile = new File(getFilesDir(), MainActivity.CONTACTS_FILENAME);
-                            OutputStream outputStream = new FileOutputStream(outFile, true);
-                            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-                            // escreve no arquivo
-                            writer.write("#\n");
-                            writer.write(contactCard.toString());
 
-                            writer.close();
-                        } catch (final FileNotFoundException exception){
-                            AddActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(AddActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            });
+        try {
+            /*File outFile = new File(getFilesDir(), AddActivity.CONTACTS_FILENAME);
+            OutputStream outputStream = new FileOutputStream(outFile, true);
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream);*/
 
-                        } catch (final IOException exception){
-                            AddActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(AddActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-                    }
-                }
-        ).start();
+            fileOutputStream = openFileOutput(String.valueOf(Constants.CONTACTS_FILENAME), Context.MODE_APPEND | Context.MODE_PRIVATE);
 
-        /*try {
-            FileOutputStream fileOutputStream = openFileOutput("agenda.txt", MODE_PRIVATE);
-            fileOutputStream.write(nameContact.getBytes());
+            Person newContact = new Person(editTextName.getText().toString(), editTextTelephone.getText().toString(), editTextEmail.getText().toString(), editTextCity.getText().toString());
+            newContact.setName(editTextName.getText().toString());
+            newContact.setTelephone(editTextTelephone.getText().toString());
+            newContact.setEmail(editTextEmail.getText().toString());
+            newContact.setCity(editTextCity.getText().toString());
+
+            // escreve no arquivo
+            //writer.write("#\n");
+            //writer.write(contactCard.toString());
+
+            fileOutputStream.write("#\n".getBytes());
+            fileOutputStream.write(newContact.getName().getBytes());
+            fileOutputStream.write("\n".getBytes());
+            fileOutputStream.write(newContact.getTelephone().getBytes());
+            fileOutputStream.write("\n".getBytes());
+            fileOutputStream.write(newContact.getEmail().getBytes());
+            fileOutputStream.write("\n".getBytes());
+            fileOutputStream.write(newContact.getCity().getBytes());
+            fileOutputStream.write("\n#".getBytes());
             fileOutputStream.close();
+
+            //writer.close();
+
             Toast.makeText(getApplicationContext(), "Contato salvo com sucesso!", Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
+
+        } catch (Exception e){
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        }
     }
 }
