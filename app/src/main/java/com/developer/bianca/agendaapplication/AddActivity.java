@@ -42,10 +42,6 @@ public class AddActivity extends AppCompatActivity {
 
 
         try {
-            /*File outFile = new File(getFilesDir(), AddActivity.CONTACTS_FILENAME);
-            OutputStream outputStream = new FileOutputStream(outFile, true);
-            OutputStreamWriter writer = new OutputStreamWriter(outputStream);*/
-
             fileOutputStream = openFileOutput(String.valueOf(Constants.CONTACTS_FILENAME), Context.MODE_APPEND | Context.MODE_PRIVATE);
 
             Person newContact = new Person(editTextName.getText().toString(), editTextTelephone.getText().toString(), editTextEmail.getText().toString(), editTextCity.getText().toString());
@@ -53,10 +49,6 @@ public class AddActivity extends AppCompatActivity {
             newContact.setTelephone(editTextTelephone.getText().toString());
             newContact.setEmail(editTextEmail.getText().toString());
             newContact.setCity(editTextCity.getText().toString());
-
-            // escreve no arquivo
-            //writer.write("#\n");
-            //writer.write(contactCard.toString());
 
             fileOutputStream.write("#\n".getBytes());
             fileOutputStream.write(newContact.getName().getBytes());
@@ -69,8 +61,6 @@ public class AddActivity extends AppCompatActivity {
             fileOutputStream.write("\n".getBytes());
             fileOutputStream.close();
 
-            //writer.close();
-
             Toast.makeText(getApplicationContext(), "Contato salvo com sucesso!", Toast.LENGTH_LONG).show();
 
         } catch (Exception e){
@@ -78,5 +68,11 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    //TODO: Implementar botão para dar clean no formulário, para adicionar um novo contato.
+    public void clearForm(View view) {
+        editTextName.getText().clear();
+        editTextTelephone.getText().clear();
+        editTextEmail.getText().clear();
+        editTextCity.getText().clear();
+    }
+
 }
