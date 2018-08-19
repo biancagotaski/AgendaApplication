@@ -1,5 +1,6 @@
 package com.developer.bianca.agendaapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -50,6 +51,7 @@ public class ListContactActivity extends AppCompatActivity {
                     public void run() {
                         final List<ListContactCard> contactCards = new ArrayList<>();
                         File inputFile = new File(getFilesDir(), Constants.CONTACTS_FILENAME);
+
                         try {
                             InputStream inputStream = new FileInputStream(inputFile);
                             InputStreamReader reader = new InputStreamReader(inputStream);

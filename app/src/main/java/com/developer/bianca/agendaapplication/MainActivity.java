@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.developer.bianca.agendaapplication.Utils.Constants;
 
 import java.io.File;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,8 +26,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void listContacts(View view){
-        Intent intent = new Intent(this, ListContactActivity.class);
-        startActivity(intent);
+        File file = getFileStreamPath(Constants.CONTACTS_FILENAME);
+        if(file.length() == 0){
+            Toast.makeText(this, "Lista vazia. Adicione um novo contato!", Toast.LENGTH_LONG).show();
+            return;
+        } else{
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void removeContacts(View view) {

@@ -58,26 +58,6 @@ public class ListContactAdapter extends RecyclerView.Adapter {
             email = itemView.findViewById(R.id.txtViewEmail);
             city = itemView.findViewById(R.id.txtViewCity);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int position = getAdapterPosition();
-//                    Intent detailContact = new Intent(v.getContext(), DetailsContactActivity.class);
-//                    Contact contact = contacts.get(position);
-//
-//                    String getName = contact.getName();
-//                    detailContact.putExtra("name",getName);
-//                    String getEmail = contact.getEmail();
-//                    detailContact.putExtra("email", getEmail);
-//                    String getCity = contact.getCity();
-//                    detailContact.putExtra("city", getCity);
-//                    String getPhone = contact.getPhone();
-//                    detailContact.putExtra("phone", getPhone);
-//
-//                    v.getContext().startActivity(detailContact);
-//                }
-//            });
-
         }
     }
 }
