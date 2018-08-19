@@ -16,7 +16,7 @@
             android:id="@+id/name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome"
+            android:hint="@string/name_editTextForm"
             android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
@@ -27,7 +27,7 @@
             android:id="@+id/telephone_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Telefone"
+            android:hint="@string/telephone_editTextForm"
             android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
@@ -38,8 +38,9 @@
             android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="E-mail"
-            android:inputType="text" />
+            android:hint="@string/email_editTextForm"
+            android:inputType="text"
+            tools:ignore="TextFields" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -49,18 +50,32 @@
             android:id="@+id/city_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cidade"
+            android:hint="@string/city_editTextForm"
             android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/send_question_button"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Adicionar"
-        android:onClick="saveContact"/>
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/clean_form_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:onClick="clearForm"
+            android:text="@string/clear_btn"/>
 
-
+        <Button
+            android:id="@+id/send_question_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="150dp"
+            android:layout_toRightOf="@+id/clean_form_btn"
+            android:text="@string/saveContact"
+            android:onClick="saveContact"/>
+    </RelativeLayout>
+    
 </LinearLayout>

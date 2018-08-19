@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">AgendaApplication</string>
+    <string name="app_name">Agenda Pessoal</string>
     <string name="label_name">Nome</string>
     <string name="label_telephone">Telefone</string>
     <string name="label_email">E-mail</string>
     <string name="label_city">Cidade</string>
-    <string name="add_btn">Adicionar</string>
+    <string name="saveContact">Adicionar</string>
+    <string name="name_editTextForm">Nome</string>
+    <string name="telephone_editTextForm">Telefone</string>
+    <string name="email_editTextForm">E-mail</string>
+    <string name="city_editTextForm">Cidade</string>
+    <string name="clear_btn">Limpar</string>
 </resources>
