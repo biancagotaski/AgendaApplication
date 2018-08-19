@@ -16,6 +16,8 @@ import java.io.FileOutputStream;
 
 public class AddActivity extends AppCompatActivity {
 
+    boolean verifyInput;
+
     EditText editTextName;
     EditText editTextTelephone;
     EditText editTextEmail;
@@ -38,43 +40,42 @@ public class AddActivity extends AppCompatActivity {
     //write data on file
     public void saveContact(View view){
 
-        boolean verifyInput = validateForm();
-        if(verifyInput){
+        if(verifyInput == true){
             Toast.makeText(this, "Preencha todos os campos obrigatórios.", Toast.LENGTH_LONG).show();
-            return;
-        }
+            verifyInput = false;
+        } else{
+            String nameContact = editTextName.getText().toString();
+            String telephoneContact = editTextName.getText().toString();
+            String emailContact = editTextName.getText().toString();
+            String cityContact = editTextName.getText().toString();
 
-        String nameContact = editTextName.getText().toString();
-        String telephoneContact = editTextName.getText().toString();
-        String emailContact = editTextName.getText().toString();
-        String cityContact = editTextName.getText().toString();
+            final ListContactCard contactCard = new ListContactCard(nameContact, telephoneContact, emailContact, cityContact);
 
-        final ListContactCard contactCard = new ListContactCard(nameContact, telephoneContact, emailContact, cityContact);
+            try {
+                fileOutputStream = openFileOutput(String.valueOf(Constants.CONTACTS_FILENAME), Context.MODE_APPEND | Context.MODE_PRIVATE);
 
-        try {
-            fileOutputStream = openFileOutput(String.valueOf(Constants.CONTACTS_FILENAME), Context.MODE_APPEND | Context.MODE_PRIVATE);
+                Person newContact = new Person(editTextName.getText().toString(), editTextTelephone.getText().toString(), editTextEmail.getText().toString(), editTextCity.getText().toString());
+                newContact.setName(editTextName.getText().toString());
+                newContact.setTelephone(editTextTelephone.getText().toString());
+                newContact.setEmail(editTextEmail.getText().toString());
+                newContact.setCity(editTextCity.getText().toString());
 
-            Person newContact = new Person(editTextName.getText().toString(), editTextTelephone.getText().toString(), editTextEmail.getText().toString(), editTextCity.getText().toString());
-            newContact.setName(editTextName.getText().toString());
-            newContact.setTelephone(editTextTelephone.getText().toString());
-            newContact.setEmail(editTextEmail.getText().toString());
-            newContact.setCity(editTextCity.getText().toString());
+                fileOutputStream.write("#\n".getBytes());
+                fileOutputStream.write(newContact.getName().getBytes());
+                fileOutputStream.write("\n".getBytes());
+                fileOutputStream.write(newContact.getTelephone().getBytes());
+                fileOutputStream.write("\n".getBytes());
+                fileOutputStream.write(newContact.getEmail().getBytes());
+                fileOutputStream.write("\n".getBytes());
+                fileOutputStream.write(newContact.getCity().getBytes());
+                fileOutputStream.write("\n".getBytes());
+                fileOutputStream.close();
 
-            fileOutputStream.write("#\n".getBytes());
-            fileOutputStream.write(newContact.getName().getBytes());
-            fileOutputStream.write("\n".getBytes());
-            fileOutputStream.write(newContact.getTelephone().getBytes());
-            fileOutputStream.write("\n".getBytes());
-            fileOutputStream.write(newContact.getEmail().getBytes());
-            fileOutputStream.write("\n".getBytes());
-            fileOutputStream.write(newContact.getCity().getBytes());
-            fileOutputStream.write("\n".getBytes());
-            fileOutputStream.close();
+                Toast.makeText(getApplicationContext(), "Contato salvo com sucesso!", Toast.LENGTH_LONG).show();
 
-            Toast.makeText(getApplicationContext(), "Contato salvo com sucesso!", Toast.LENGTH_LONG).show();
-
-        } catch (Exception e){
-            e.printStackTrace();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -83,22 +84,28 @@ public class AddActivity extends AppCompatActivity {
         editTextTelephone.getText().clear();
         editTextEmail.getText().clear();
         editTextCity.getText().clear();
+        validateForm();
     }
 
     //TODO: mostrar erro somente quando o input estiver com foco
-    public boolean validateForm(){
+    //TODO: mostrar teclado que possua números quando o editText de telefone for 'focado'
+    //TODO: mostrar teclado com @ para o input de e-mail
+    public void validateForm(){
         if(editTextName.getText().toString().trim().equals("")){
             editTextName.setError("Campo obrigatório");
+            verifyInput = true;
         }
         if(editTextEmail.getText().toString().trim().equals("")){
             editTextEmail.setError("Campo obrigatório");
+            verifyInput = true;
         }
         if(editTextTelephone.getText().toString().trim().equals("")){
             editTextTelephone.setError("Campo obrigatório");
+            verifyInput = true;
         }
         if(editTextCity.getText().toString().trim().equals("")){
             editTextCity.setError("Campo obrigatório");
+            verifyInput = true;
         }
-        return true;
     }
 }
